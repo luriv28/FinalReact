@@ -3,7 +3,7 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 
 const Forms = () => {
-  const [data, setData] = useState({
+  const [form, setForm] = useState({
     nombre: "",
     apellido: "",
     telefono: "",
@@ -12,14 +12,14 @@ const Forms = () => {
 
   const handleInputChange = (event) => {
     // console.log(event.target.value);
-    setData({
-      ...data,
+    setForm({
+      ...form,
       [event.target.name]: event.target.value,
     });
   };
-  const sendData = (event) => {
+  const submitForm = (event) => {
     event.preventDefault();
-    console.log(data.nombre + " " + " " + data.apellido + data.email);
+    console.log(form.nombre + " " + " " + form.apellido + form.email);
   };
 
   return (
@@ -28,7 +28,7 @@ const Forms = () => {
         <h4>Formulario de envio</h4>
         <div className="title">Concreta tu compra!</div>
         <div className="subtitle mb-3 ">Ingresa tus datos</div>
-        <form onSubmit={sendData} className="column">
+        <form onSubmit={submitForm} className="column">
           <div className="col-md-3">
             <input
               className="form-control mb-3"
@@ -36,6 +36,8 @@ const Forms = () => {
               type="text"
               name="nombre"
               onChange={handleInputChange}
+              value={form.nombre}
+              required
             />
           </div>
           <div className="col-md-3">
@@ -45,6 +47,8 @@ const Forms = () => {
               type="text"
               name="apellido"
               onChange={handleInputChange}
+              value={form.apellido}
+              required
             />
           </div>
           <div className="col-md-3">
@@ -54,6 +58,8 @@ const Forms = () => {
               type="number"
               name="telefono"
               onChange={handleInputChange}
+              value={form.telefono}
+              required
             />
           </div>
           <div className="col-md-3">
@@ -63,7 +69,8 @@ const Forms = () => {
               type="email"
               name="email"
               onChange={handleInputChange}
-              required={true}
+              value={form.email}
+              required
             />
           </div>
           <div className="col-md-3">
@@ -73,7 +80,8 @@ const Forms = () => {
               type="email"
               name="email"
               onChange={handleInputChange}
-              required={true}
+              value={form.email}
+              required
             />
           </div>
           <div className="col-md-3">
