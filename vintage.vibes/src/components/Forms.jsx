@@ -6,7 +6,7 @@ import { CartContext } from "../Context/CartContext";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 const Forms = () => {
-  // const { cart, totalPrice } = useContext(CartContext);
+  const { cart, totalPrice } = useContext(CartContext);
 
   const [form, setForm] = useState({
     direccion: "",
@@ -16,6 +16,18 @@ const Forms = () => {
     email: "",
   });
 
+  const order = {
+    buyer: {
+      direccion: form.direccion,
+      nombre: form.nombre,
+      apellido: form.apellido,
+      telefono: form.telefono,
+      email: form.email,
+    },
+    cart,
+    total: totalPrice(),
+  };
+
   const handleInputChange = (event) => {
     // console.log(event.target.value);
     setForm({
@@ -23,9 +35,17 @@ const Forms = () => {
       [event.target.name]: event.target.value,
     });
   };
+
   const submitForm = (event) => {
     event.preventDefault();
-    console.log(form.nombre + " " + " " + form.apellido + form.email);
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+    // console.log(form.nombre + " " + " " + form.apellido + form.email);
+    const db = getFirestore();
+    const ordersCollection = collection(db, "orders");
+    addDoc(ordersCollection, order).then(({ id }) => console.log(id));
   };
 
   return (
@@ -34,7 +54,7 @@ const Forms = () => {
         <h4>Formulario de envio</h4>
         <div className="title">Concreta tu compra!</div>
         <div className="subtitle mb-3 ">Ingresa tus datos</div>
-        <form onSubmit={submitForm} className="column">
+        <form className="column" onSubmit={submitForm}>
           <div className="col-md-3">
             <input
               className="form-control mb-3"
@@ -102,7 +122,11 @@ const Forms = () => {
             />
           </div>
           <div className="col-md-3">
-            <button className="btn btn-primary mb-3" type="submit">
+            <button
+              onClick={submitForm}
+              className="btn btn-primary mb-3"
+              type="submit"
+            >
               Enviar
             </button>
           </div>
