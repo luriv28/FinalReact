@@ -15,12 +15,6 @@ const Cart = () => {
       phone: "4444-4444",
       address: "Los Angeles",
     },
-    // items: cart.map((item) => ({
-    //   id: item.id,
-    //   name: item.name,
-    //   price: item.price,
-    //   quantity: item.quantity,
-    // })
     cart,
   };
   total: totalPrice();
@@ -29,11 +23,6 @@ const Cart = () => {
     const db = getFirestore();
     const ordersCollection = collection(db, "orders");
     addDoc(ordersCollection, order).then(({ id }) => console.log(id));
-    // alert(`Datos de compra:
-    // Comprador: Lucas
-    // Email: lucasesteban.r@gmail.com
-    // Tel: 4444-4444
-    // Direccion de envio: Los Angeles`);
   };
 
   if (cart.length === 0) {
@@ -52,7 +41,8 @@ const Cart = () => {
       <hr />
       <p className="totalCompra">Total compra: US$ {totalPrice()}</p>
       <Link to="/form">
-        <button onClick={handleClick}> Emitir compra</button>
+        {/* <button onClick={handleClick}> Emitir compra</button> */}
+        <button> Emitir compra</button>
       </Link>
     </>
   );

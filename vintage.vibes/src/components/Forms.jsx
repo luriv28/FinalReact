@@ -6,7 +6,10 @@ import { CartContext } from "../Context/CartContext";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 const Forms = () => {
+  // const { cart, totalPrice } = useContext(CartContext);
+
   const [form, setForm] = useState({
+    direccion: "",
     nombre: "",
     apellido: "",
     telefono: "",
@@ -32,6 +35,17 @@ const Forms = () => {
         <div className="title">Concreta tu compra!</div>
         <div className="subtitle mb-3 ">Ingresa tus datos</div>
         <form onSubmit={submitForm} className="column">
+          <div className="col-md-3">
+            <input
+              className="form-control mb-3"
+              placeholder="Ingrese su direccion"
+              type="text"
+              name="direccion"
+              onChange={handleInputChange}
+              value={form.direccion}
+              required
+            />
+          </div>
           <div className="col-md-3">
             <input
               className="form-control mb-3"

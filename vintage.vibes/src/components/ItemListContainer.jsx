@@ -40,7 +40,7 @@ const ItemListContainer = ({ greeting }) => {
       );
     }
   }, [category]);
-  console.log(items);
+  // console.log(items);
   //la informacion de lo que se resuelve en la promesa me llega por parametro, y le pongo el nombre que quiera -info-
 
   return (
