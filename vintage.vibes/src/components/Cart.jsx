@@ -29,11 +29,11 @@ const Cart = () => {
     const db = getFirestore();
     const ordersCollection = collection(db, "orders");
     addDoc(ordersCollection, order).then(({ id }) => console.log(id));
-    alert(`Datos de compra:
-    Comprador: Lucas
-    Email: lucasesteban.r@gmail.com
-    Tel: 4444-4444
-    Direccion de envio: Los Angeles`);
+    // alert(`Datos de compra:
+    // Comprador: Lucas
+    // Email: lucasesteban.r@gmail.com
+    // Tel: 4444-4444
+    // Direccion de envio: Los Angeles`);
   };
 
   if (cart.length === 0) {
