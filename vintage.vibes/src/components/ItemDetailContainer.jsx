@@ -25,7 +25,7 @@ const ItemDetailContainer = () => {
     );
     setTimeout(() => {
       setLoading(false);
-    }, 500);
+    }, 700);
   }, [id]);
 
   return <>{loading ? <Loader /> : <ItemDetail item={item} />}</>;

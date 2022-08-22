@@ -11,21 +11,16 @@ import {
   where,
 } from "firebase/firestore";
 
-// import Loader from "./Loader";
-
 const ItemListContainer = ({ greeting }) => {
-  const handleClick = () => {
-    // alert("Proximamente podras visualizar todas nuestras novedades");
-  };
+  const handleClick = () => {};
 
   const [items, setItems] = useState([]);
-  // const [loading, setLoading] = useState(true);
+
   const { category } = useParams();
 
   useEffect(() => {
     const querydb = getFirestore();
     const queryCollection = collection(querydb, "productos");
-    // setLoading(false);
     if (category) {
       const queryFilter = query(
         queryCollection,

@@ -42,7 +42,6 @@ const Forms = () => {
   };
 
   const handleInputChange = (event) => {
-    // console.log(event.target.value);
     setForm({
       ...form,
       [event.target.name]: event.target.value,
