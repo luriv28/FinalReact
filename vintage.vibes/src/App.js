@@ -6,6 +6,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Provider from "../src/Context/CartContext";
 import Cart from "./components/Cart";
 import Forms from './components/Forms'
+
+
+
 function App() {
   return (
     <Provider>

@@ -4,9 +4,16 @@ import "bootstrap/dist/css/bootstrap.css";
 import { useContext } from "react";
 import { CartContext } from "../Context/CartContext";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Forms = () => {
-  const { cart, totalPrice } = useContext(CartContext);
+  const { cart, totalPrice, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
+  const mySwal = withReactContent(Swal);
+  let newDate = new Date();
 
   const [form, setForm] = useState({
     direccion: "",
@@ -24,6 +31,12 @@ const Forms = () => {
       telefono: form.telefono,
       email: form.email,
     },
+    date:
+      String(newDate.getDate()).padStart(2, "0") +
+      "/" +
+      String(newDate.getMonth() + 1).padStart(2, "0") +
+      "/" +
+      newDate.getFullYear(),
     cart,
     total: totalPrice(),
   };
@@ -42,12 +55,26 @@ const Forms = () => {
       ...form,
       [event.target.name]: event.target.value,
     });
-    // console.log(form.nombre + " " + " " + form.apellido + form.email);
+
     const db = getFirestore();
     const ordersCollection = collection(db, "orders");
-    addDoc(ordersCollection, order).then(({ id }) => console.log(id));
-  };
+    addDoc(ordersCollection, order)
+      .then((res) => {
+        mySwal.fire({
+          icon: "success",
+          text: `Compra Finalizada! Su numero de orden es # ${res.id}.
 
+          El importe total es de US$ ${totalPrice()}.
+          
+          El pedido sera enviado a la siguiente direccion: ${form.direccion} `,
+        });
+        clearCart();
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <div className="container mt-5 border solid  10px ">
@@ -102,6 +129,7 @@ const Forms = () => {
           <div className="col-md-3">
             <input
               className="form-control mb-3 mb-3"
+              id="email"
               placeholder="Ingrese su e-mail"
               type="email"
               name="email"
@@ -113,22 +141,25 @@ const Forms = () => {
           <div className="col-md-3">
             <input
               className="form-control mb-3 mb-3"
+              id="emailConfirmacion"
               placeholder="Confirme su e-mail"
-              type="email"
-              name="email"
+              type="emailConfirmacion"
+              name="emailConfirmacion"
               onChange={handleInputChange}
               value={form.email}
               required
             />
           </div>
           <div className="col-md-3">
-            <button
-              onClick={submitForm}
-              className="btn btn-primary mb-3"
-              type="submit"
-            >
-              Enviar
-            </button>
+            <Link to="/categories/cuadro">
+              <button
+                onClick={submitForm}
+                className="btn btn-primary mb-3"
+                type="submit"
+              >
+                Finalizar compra
+              </button>
+            </Link>
           </div>
         </form>
       </div>
