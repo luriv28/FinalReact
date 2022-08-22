@@ -1,4 +1,6 @@
-<p><img src="https://github.com/luriv28/FinalReact/blob/main/vintage.vibes/reactGiph.mp4" width="800px" height="520px"/></p>
+<p>
+<img src="" width="800px" height="520px"/>
+</p>
 
 # Getting Started with Create React App
 
