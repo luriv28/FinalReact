@@ -1,5 +1,5 @@
 <p>
-<img src="" width="800px" height="520px"/>
+<img src="https://github.com/luriv28/FinalReact/blob/main/vintage.vibes/VideoReact.gif" width="800px" height="520px"/>
 </p>
 
 # Getting Started with Create React App
